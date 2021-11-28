@@ -10,21 +10,28 @@ const Posts = () => {
 
   useEffect(() => {
     axios
-      .get("https://localhost:3001/posts")
+      .get("http://localhost:3001/posts")
       .then((response) => {
-        console.log(response.data);
         setPosts(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, [posts]);
+  }, []);
 
   return (
     <section className={styles.container}>
       {posts.length > 0 ? (
         posts.map((post) => {
-          return <Post post={post} />;
+          return (
+            <Post
+              key={post.id}
+              title={post.title}
+              user={post.user}
+              content={post.content}
+              id={post.id}
+            />
+          );
         })
       ) : (
         <span>No posts yet</span>

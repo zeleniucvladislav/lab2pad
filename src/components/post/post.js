@@ -8,30 +8,35 @@ import { faWindowClose, faEdit } from "@fortawesome/free-solid-svg-icons";
 
 import styles from "./post.module.scss";
 
-const Post = (props) => {
+const Post = ({ title, user, content, id }) => {
   const [editMode, setEditMode] = useState(false);
 
   const onDelete = () => {
     axios
-      .post("/https://localhost:3001/posts/delete", { id: props.id })
+      .post("http://localhost:3001/posts/delete", { id })
       .then((response) => {
         console.log(response);
+        window.location = "/";
       })
       .catch((error) => {
         console.log(error);
       });
+    console.log("delete");
   };
 
   return (
     <article className={styles.post}>
       {editMode ? (
-        <EditPost cancelEdit={() => setEditMode(false)} post={props} />
+        <EditPost
+          propsPost={{ title, user, content, id }}
+          cancelEdit={() => setEditMode(false)}
+        />
       ) : (
         <>
           <div className={styles.header}>
-            <h5 className={styles.username}>{props.user}</h5>
+            <h5 className={styles.username}>{user}</h5>
             <div className={styles.header__right}>
-              <div className={styles.icon_delete} onClick={() => onDelete}>
+              <div className={styles.icon_delete} onClick={onDelete}>
                 <FontAwesomeIcon icon={faWindowClose} className={styles.icon} />
               </div>
               <div>
@@ -43,8 +48,8 @@ const Post = (props) => {
               </div>
             </div>
           </div>
-          <h2>{props.title}</h2>
-          <p>{props.content}</p>
+          <h2>{title}</h2>
+          <p>{content}</p>
         </>
       )}
     </article>

@@ -13,7 +13,7 @@ export default function CreatePost({ closeModal }) {
   const onSubmit = (evt) => {
     evt.preventDefault();
     axios
-      .post("https://localhost:3001/posts/add", { post })
+      .post("http://localhost:3001/posts/add", { post })
       .then((response) => {
         console.log(response);
       })

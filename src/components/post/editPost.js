@@ -1,20 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 import styles from "./editPost.module.scss";
 
-const EditPost = (props) => {
-  const [post, setPost] = useState(props);
+const EditPost = ({ cancelEdit, propsPost }) => {
+  const [post, setPost] = useState(propsPost);
 
   const onChange = (evt) => {
-    setPost({ ...post, [evt.target.value]: evt.target.name });
-    console.log(post);
+    setPost({ ...post, [evt.target.name]: evt.target.value });
   };
 
   const onSubmit = (evt) => {
     evt.preventDefault();
     axios
-      .post("https://localhost:3001/posts/update", { post })
+      .post("http://localhost:3001/posts/update", { post })
       .then(function (response) {
         console.log(response);
       })
@@ -59,7 +58,7 @@ const EditPost = (props) => {
         <button type="submit" className={styles.submit_btn}>
           Submit
         </button>
-        <div className={styles.close_btn} onClick={props.cancelEdit}>
+        <div className={styles.close_btn} onClick={cancelEdit}>
           Close
         </div>
       </div>
