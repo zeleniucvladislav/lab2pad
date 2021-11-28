@@ -16,6 +16,7 @@ const EditPost = ({ cancelEdit, propsPost }) => {
       .post("http://localhost:3001/posts/update", { post })
       .then(function (response) {
         console.log(response);
+        window.location = "/";
       })
       .catch(function (error) {
         console.log(error);
