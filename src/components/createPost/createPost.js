@@ -13,14 +13,14 @@ export default function CreatePost({ closeModal }) {
   const onSubmit = (evt) => {
     evt.preventDefault();
     axios
-      .post("http://localhost:3001/posts/add", { post })
+      .post("http://localhost:3001/posts/add", post)
       .then((response) => {
         console.log(response);
+        window.location = "/";
       })
       .catch((error) => {
         console.log(error);
-      })
-      .then(() => (window.location = "/"));
+      });
   };
 
   return (

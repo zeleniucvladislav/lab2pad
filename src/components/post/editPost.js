@@ -13,7 +13,7 @@ const EditPost = ({ cancelEdit, propsPost }) => {
   const onSubmit = (evt) => {
     evt.preventDefault();
     axios
-      .post("http://localhost:3001/posts/update", { post })
+      .post("http://localhost:3001/posts/update", post)
       .then(function (response) {
         console.log(response);
         window.location = "/";
